@@ -23,3 +23,10 @@ class Education(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     achievements = models.TextField(blank=True)
+    
+class JobVacancy(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    requirements = models.TextField()
+    location = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=200)

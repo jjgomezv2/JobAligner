@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario para generar tu hoja de vida</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Información personal</h2>
+        {{ form.user_profile.as_p }}
+        
+        <h2>Experiencia Laboral más reciente</h2>
+        {{ form.work_experience.as_p }}
+        
+        <h2>Educación formal más reciente</h2>
+        {{ form.education.as_p }}
+
+        <button type="submit">Siguiente</button>
+    </form>
+</body>
+</html>
 
 
 {% endblock content %}
