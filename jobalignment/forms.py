@@ -39,8 +39,3 @@ class UserProfileForm(forms.ModelForm):
             'skills': 'Habilidades',
         }
 
-
-class CombinedForm(forms.Form):
-    user_profile = UserProfileForm()
-    work_experience = WorkExperienceForm()
-    education = EducationForm()
