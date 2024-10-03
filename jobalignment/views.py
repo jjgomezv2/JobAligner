@@ -33,7 +33,6 @@ def experience(request, user_id):
                 education = educationform.save(commit=False)
                 education.user = user_profile
                 education.save()
-                return redirect('success')
             
         elif 'formExperience' in request.POST:
             experienceForm = WorkExperienceForm(request.POST)
@@ -41,7 +40,15 @@ def experience(request, user_id):
                 experience = experienceForm.save(commit=False)
                 experience.user = user_profile
                 experience.save()
-                return redirect('success')
+                
+
+        elif 'continueBtn' in request.POST:  # Manejo del botón "Continuar"
+            return redirect('success')  # Redirige a la página de éxito
+        
+
+        educationform = EducationForm()
+        experienceForm = WorkExperienceForm()
+        
     else:
         educationform = EducationForm()
         experienceForm = WorkExperienceForm()

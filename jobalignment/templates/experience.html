@@ -89,8 +89,12 @@
 
     <br>
 
-    <div style="display: flex; justify-content: center;">
-        <a href="{% url 'vacancy' %}" class="btn btn-warning"> Continuar </a>
-    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" class="btn btn-warning" name="continueBtn">Continuar</button>
+        </div>
+    </form>
+    
 
 </body>
