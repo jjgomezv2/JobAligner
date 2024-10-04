@@ -25,9 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', jobAlignmentViews.home, name='home'),
     path('success/', jobAlignmentViews.success, name='success'),
-    path('vacancy/', jobAlignmentViews.vacancy, name='vacancy'),
+    path('vacancy/<str:user_id>/', jobAlignmentViews.vacancy, name='vacancy'),
     path('signup/', jobAlignmentViews.signUp, name='signup'),
     path('experience/<str:user_id>/', jobAlignmentViews.experience, name='experience'),
+    path('cv/<str:user_id>/<int:vacancy_id>/', jobAlignmentViews.cv, name='cv'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

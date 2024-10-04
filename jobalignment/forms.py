@@ -1,5 +1,5 @@
 from django import forms
-from .models import WorkExperience, Education, User
+from .models import WorkExperience, Education, User, JobVacancy
 
 class WorkExperienceForm(forms.ModelForm):
     class Meta:
@@ -37,5 +37,17 @@ class UserProfileForm(forms.ModelForm):
             'email': 'Correo electrónico',
             'linkedin': 'Enlace LinkedIn',
             'skills': 'Habilidades',
+        }
+
+class JobVacancyForm(forms.ModelForm):
+    class Meta:
+        model = JobVacancy
+        fields = '__all__'
+        labels = {
+            'title': 'Título de la vacante',
+            'decription': 'Descripción de la vacante',
+            'requirements': 'Requisitos de la vacante',
+            'location': 'Localización del lugar',
+            'company_name': 'Nombre de la compañía',
         }
 
