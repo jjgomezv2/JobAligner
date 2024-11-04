@@ -8,11 +8,38 @@
     <title>Tu Hoja de Vida</title>
 </head>
 <body>
+    <br>
+    <br>
+    <h1 class="text-center">Hoja de Vida para {{ cv.vacancy.title }}</h1>
 
-    <h1 style="text-align: center;">Tu Hoja de Vida</h1>
+    <br>
+    <br>
+    <br>
+    {% if cv.cvpdf %}
+        <div class="d-flex justify-content-center">
+            <!-- Botón para abrir el PDF -->
+            <a href="{{ cv.cvpdf.url }}" target="_blank" class="btn btn-primary me-2">Abrir PDF</a>
+            <!-- Botón para descargar el PDF -->
+            <a href="{{ cv.cvpdf.url }}" download class="btn btn-secondary">Descargar PDF</a>
+        </div>
+    {% else %}
+        <p>No se encontró el archivo PDF.</p>
+    {% endif %}
 
-    {{ hoja|safe }}
-    
-    
+    <br>
+    <br>
+    <h3>Descripción de la vacante:</h3>
+    <p>{{ cv.vacancy.description }}</p>
+    <br>
+    <h3>Ubicación:</h3>
+    <p>{{ cv.vacancy.location }}</p>
+    <br>
+    <h3>Compañía:</h3>
+    <p>{{ cv.vacancy.company_name }}</p>
+    <br>
+    <h3>Requisitos:</h3>
+    <p>{{ cv.vacancy.requirements }}</p>
+    <br>
+    <br>
 </body>
 {% endblock content %}

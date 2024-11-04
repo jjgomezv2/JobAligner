@@ -15,20 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from jobalignment import views as jobAlignmentViews
+from Accounting import views as accountingViews
 
 from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+    path('', accountingViews.landing, name='landing'),
     path('admin/', admin.site.urls),
-    path('', jobAlignmentViews.home, name='home'),
+    path('account/', include('Accounting.urls')),
     path('success/', jobAlignmentViews.success, name='success'),
-    path('vacancy/<str:user_id>/', jobAlignmentViews.vacancy, name='vacancy'),
-    path('signup/', jobAlignmentViews.signUp, name='signup'),
-    path('experience/<str:user_id>/', jobAlignmentViews.experience, name='experience'),
-    path('cv/<str:user_id>/<int:vacancy_id>/', jobAlignmentViews.cv, name='cv'),
+    path('vacancy/', jobAlignmentViews.vacancy, name='vacancy'),
+    path('home/', jobAlignmentViews.home, name='home'),
+    path('cv/<int:cv_id>/', jobAlignmentViews.cv, name='cv'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
