@@ -54,6 +54,10 @@ def loginacc(request):
         login(request,user) 
         return redirect('home')
     
+@login_required
+def logoutaccount(request): 
+    logout(request) 
+    return redirect('landing') 
 
 @login_required
 def experience(request):

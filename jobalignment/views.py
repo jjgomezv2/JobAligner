@@ -28,7 +28,7 @@ def home(request):
     else:
         cvs = CV.objects.filter(user = user_profile)
     
-    return render(request, 'home.html', {'searchTerm':searchTerm, 'cvs': cvs, 'user': user_profile})
+    return render(request, 'home.html', {'user': user,'searchTerm':searchTerm, 'cvs': cvs})
 
 
 def success(request):

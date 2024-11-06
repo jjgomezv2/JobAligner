@@ -18,7 +18,7 @@
             <a class="nav-link active fs-4" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled fs-4" aria-disabled="true">Disabled</a>
+            <a class="nav-link active fs-4" aria-current="page" href="{% url 'experience' %}">Añadir experiencia</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled fs-4" aria-disabled="true">Disabled</a>
@@ -28,8 +28,7 @@
           </li>
         </ul>
         <div class="d-flex ms-auto">
-            <button class="btn btn-outline-dark ms-auto me-3" type="button" href="#">Ingresa</button>
-            <button class="btn btn-outline-dark" type="button" href="#">Únete</button>
+          <a class="nav-link nav-text" href="{% url 'logoutaccount' %}">Logout ({{ user.username }})</a> 
         </div>
       </div>
     </div>
