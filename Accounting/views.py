@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UserProfileForm, WorkExperienceForm, EducationForm
-from .models import User
+from .models import User, Education, WorkExperience
 
 # Create your views here.
 
@@ -93,4 +93,16 @@ def experience(request):
         experienceForm = WorkExperienceForm()
             
     return render(request, 'experience.html', {'education': educationform, 'experience': experienceForm})
+
+def updateAccount(request):
+    user = request.user  # Django's user
+    user_profile = User.objects.get(user=user) # Our user
+
+    searchTerm = request.GET.get('searchEducation')
+    if searchTerm:
+        educations = Education.objects.filter(degree__icontains = searchTerm, user = user_profile)
+    else:
+        educations = Education.objects.filter(user = user_profile)
+    
+    return render(request, 'update.html', {'educations': educations})
 
