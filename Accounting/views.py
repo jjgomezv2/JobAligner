@@ -41,6 +41,8 @@ def signUp(request):
                               {'user_form': user_form, 'profile_form': profile_form, 'error': 'Form Validation Error'})
 
 def loginacc(request): 
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method == 'GET': 
         return render(request, 'login.html', 
             {'form':AuthenticationForm}) 
