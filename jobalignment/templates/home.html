@@ -9,16 +9,24 @@
 <body>   
 <div class="container">
     <br>
+    {% if messages %}
+    <div class="alert alert-success" id="success-message">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <br>
     <h2>Tus Hojas de Vida</h2>
     <a class="btn btn-classic mt-3" href="{% url 'vacancy' %}" role="button">Agregar una nueva vacante</a>
     <form action="">
         <div class="mb-2 d-flex align-items-center justify-content-end">
-            <label for="searchProduct" class="form-label mx-2">Search by product name:</label>
-            <input type="text" class="form-control  w-25" name="searchProduct" placeholder="Type product's name"/>
-            <button type="submit" class="btn btn-classic mx-2 mb-0">Search</button>
+            <label for="searchProduct" class="form-label mx-2">Buscar por nombre:</label>
+            <input type="text" class="form-control  w-25" name="searchProduct" placeholder="Nombre de la vacante"/>
+            <button type="submit" class="btn btn-classic mx-2 mb-0">Buscar</button>
         </div>
         {% if searchTerm %}
-            <p>Searching for {{ searchTerm }}</p>
+            <p>Buscando por: {{ searchTerm }}</p>
         {% endif %}
     </form>
 
@@ -31,10 +39,31 @@
                     <h5 class="card-company fw-bold"> Compañía: {{ cv.vacancy.company_name }}</h5>
                     <h5 class="card-location fw-bold"> Ubicación: {{ cv.vacancy.location }}</h5>
                     <br>
+                    
                     <div class="btn-container">
                         <a href="{% url 'cv' cv.id %}" class="btn btn-primary me-2">Ver detalles</a>
+                        <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{ cv.id }}">
+                            Eliminar
+                        </button>
                     </div>
                     <br>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal{{ cv.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ cv.id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel{{ cv.id }}">Confirmar eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar este CV?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a href="{% url 'delete_cv' cv.id %}" class="btn btn-danger">Eliminar</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,6 +71,16 @@
     </div>
     <br>
 </div>
+
+<script>
+    // Espera 3 segundos para ocultar mensaje de éxito
+    setTimeout(function() {
+        var messageElement = document.getElementById('success-message');
+        if (messageElement) {
+            messageElement.style.display = 'none';
+        }
+    }, 3000); // Cambia el tiempo si quieres que dure más o menos
+</script>
 
 </body>
 {% endblock content %}

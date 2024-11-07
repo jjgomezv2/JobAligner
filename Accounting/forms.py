@@ -24,6 +24,14 @@ class WorkExperienceForm(forms.ModelForm):
             'end_date': 'Fecha de fin',
             'achievements': 'Logros',
         }
+    
+    start_date = forms.DateField(
+        widget=forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD', 'type': 'date'})
+    )
+    end_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD', 'type': 'date'})
+    )
         
 
 class EducationForm(forms.ModelForm):
@@ -37,3 +45,11 @@ class EducationForm(forms.ModelForm):
             'end_date': 'Fecha de fin',
             'achievements': 'Logros',
         }
+        
+    start_date = forms.DateField(
+        widget=forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD', 'type': 'date'})
+    )
+    end_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD', 'type': 'date'})
+    )

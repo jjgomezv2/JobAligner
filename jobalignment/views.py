@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import JobVacancyForm
 from .models import JobVacancy, CV
 from Accounting.models import User, WorkExperience, Education
+from Suggestions.views import generate_suggestions
+from Suggestions.models import Suggestion
 
 # AI Libraries
 import os
@@ -21,15 +24,24 @@ def home(request):
 
     user = request.user  # Django's user
     user_profile = User.objects.get(user=user) # Our user
+    
 
     searchTerm = request.GET.get('searchProduct')
     if searchTerm:
         cvs = CV.objects.filter(vacancy__title__icontains = searchTerm, user = user_profile)
     else:
         cvs = CV.objects.filter(user = user_profile)
+        
+
     
     return render(request, 'home.html', {'user': user,'searchTerm':searchTerm, 'cvs': cvs})
 
+@login_required
+def delete_cv(request, cv_id):
+    cv = get_object_or_404(CV, id=cv_id)
+    cv.delete()
+    messages.success(request, "El CV ha sido eliminado correctamente.")
+    return redirect('home')
 
 def success(request):
     return render(request, 'success.html')
@@ -147,6 +159,8 @@ def vacancy(request):
 
             new_cv.save()
             
+            generate_suggestions(new_cv)
+            
             return redirect('cv', cv_id=new_cv.id)
     else:
         form = JobVacancyForm()
@@ -204,5 +218,7 @@ def generateDocumentCV(formatedText, idcv):
 def cv(request, cv_id):
     
     cv = get_object_or_404(CV, id=cv_id)
-    print(cv.cvpdf.url)
-    return render(request, 'cv.html', {'cv': cv})
+    
+    suggestion = Suggestion.objects.get(cv = cv)
+    
+    return render(request, 'cv.html', {'cv': cv, 'suggestion': suggestion})

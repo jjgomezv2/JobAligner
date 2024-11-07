@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UserProfileForm, WorkExperienceForm, EducationForm
@@ -94,6 +95,7 @@ def experience(request):
             
     return render(request, 'experience.html', {'education': educationform, 'experience': experienceForm})
 
+@login_required
 def updateAccount(request):
     user = request.user  # Django's user
     user_profile = User.objects.get(user=user) # Our user
@@ -103,6 +105,25 @@ def updateAccount(request):
         educations = Education.objects.filter(degree__icontains = searchTerm, user = user_profile)
     else:
         educations = Education.objects.filter(user = user_profile)
+        
+    searchTerm2 = request.GET.get('searchExperience')
+    if searchTerm2:
+        experiences = WorkExperience.objects.filter(role__icontains = searchTerm2, user = user_profile)
+    else:
+        experiences = WorkExperience.objects.filter(user = user_profile)
     
-    return render(request, 'update.html', {'educations': educations})
+    return render(request, 'update.html', {'educations': educations, 'experiences': experiences})
 
+@login_required
+def delete_work_experience(request, experience_id):
+    experience = get_object_or_404(WorkExperience, id=experience_id)
+    experience.delete()
+    messages.success(request, "La experiencia ha sido eliminada correctamente.")
+    return redirect('updateAccount')
+
+@login_required
+def delete_education(request, education_id):
+    education = get_object_or_404(Education, id=education_id)
+    education.delete()
+    messages.success(request, "La educación ha sido eliminada correctamente.")
+    return redirect('updateAccount')

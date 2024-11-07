@@ -30,6 +30,7 @@ urlpatterns = [
     path('vacancy/', jobAlignmentViews.vacancy, name='vacancy'),
     path('home/', jobAlignmentViews.home, name='home'),
     path('cv/<int:cv_id>/', jobAlignmentViews.cv, name='cv'),
+    path('cv/delete/<int:cv_id>/', jobAlignmentViews.delete_cv, name='delete_cv'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

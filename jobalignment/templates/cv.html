@@ -28,6 +28,8 @@
 
     <br>
     <br>
+    <h2>Probabilidad de éxito: {{ suggestion.probability }}% </h2>
+    <br>
     <h3>Descripción de la vacante:</h3>
     <p>{{ cv.vacancy.description }}</p>
     <br>
@@ -40,6 +42,9 @@
     <h3>Requisitos:</h3>
     <p>{{ cv.vacancy.requirements }}</p>
     <br>
+    <br>
+    <h2>Recomendaciones para obtener el puesto:</h2>
+    <p>{{ suggestion.suggestions | safe }}</p>
     <br>
 </body>
 {% endblock content %}
