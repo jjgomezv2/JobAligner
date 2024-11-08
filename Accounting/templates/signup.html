@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <title>Registro</title>
     <style>
-        /* Clase personalizada para el color de fondo de la tarjeta derecha */
         .bg-custom-color {
-            background-color: #0712aada; /* Cambia este color por el que prefieras */
+            background-color: #9ee4b8;
+        }
+
+        .btn{
+            background-color: #090467;
+            transition: .4s;
+            color: #ffffff
         }
     </style>
 </head>
@@ -29,10 +34,13 @@
                                 {% csrf_token %}
                                 {{ user_form.as_p }}
                                 {{ profile_form.as_p }}
-                                <button type="submit" class="btn btn-classic mb-0">
-                                    Sign Up
-                                </button>
-                            </form>
+                                <div class="d-flex justify-content-start mt-4">
+                                    <a class = "btn btn-secondary mx-3" href="{% url 'landing' %}" role = "button">Regresa</a>
+                                    <button type="submit" class="btn btn-classic mb-0">
+                                        Regístrate
+                                    </button>
+                                </div>
+                            </form>                            
                         </p>
                     </div>
                 </div>

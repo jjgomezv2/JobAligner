@@ -85,7 +85,7 @@ def experience(request):
                 
 
         elif 'continueBtn' in request.POST:  # Manejo del botón "Continuar"
-            return redirect('home')
+            return redirect('updateAccount')
         
 
         educationform = EducationForm()

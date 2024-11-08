@@ -1,0 +1,16 @@
+.btn-classic{
+    background-color: #090467 !important;
+    color:white !important;
+}
+
+.btn-container{
+    display: grid !important;
+}
+
+.navbar{
+    background-color: #EFF8FF !important;
+}
+
+.footer{
+    background-color: #e7f4fd !important;
+}

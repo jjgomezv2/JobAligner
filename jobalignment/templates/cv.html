@@ -18,7 +18,7 @@
     {% if cv.cvpdf %}
         <div class="d-flex justify-content-center">
             <!-- Botón para abrir el PDF -->
-            <a href="{{ cv.cvpdf.url }}" target="_blank" class="btn btn-primary me-2">Abrir PDF</a>
+            <a href="{{ cv.cvpdf.url }}" target="_blank" class="btn btn-classic me-2">Abrir PDF</a>
             <!-- Botón para descargar el PDF -->
             <a href="{{ cv.cvpdf.url }}" download class="btn btn-secondary">Descargar PDF</a>
         </div>
@@ -45,6 +45,10 @@
     <br>
     <h2>Recomendaciones para obtener el puesto:</h2>
     <p>{{ suggestion.suggestions | safe }}</p>
+    <br>
+    <div class="d-flex justify-content-center mt-2 mb-2">
+        <a class="btn btn-secondary me-2" href="{% url 'home' %}" role="button">Regresa</a>
+    </div>
     <br>
 </body>
 {% endblock content %}

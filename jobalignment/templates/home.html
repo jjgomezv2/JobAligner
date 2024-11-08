@@ -41,7 +41,8 @@
                     <br>
                     
                     <div class="btn-container">
-                        <a href="{% url 'cv' cv.id %}" class="btn btn-primary me-2">Ver detalles</a>
+                        <a href="{% url 'cv' cv.id %}" class="btn btn-classic me-2">Ver detalles</a>
+                        <br>
                         <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{ cv.id }}">
                             Eliminar
                         </button>
@@ -67,7 +68,10 @@
                 </div>
             </div>
         </div>
-        {% endfor %}        
+        {% endfor %}
+        {% if not cvs %}
+            <p class="text">¡Crea tu primer CV!</p>
+        {% endif %}  
     </div>
     <br>
 </div>
