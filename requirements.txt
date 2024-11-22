@@ -1,0 +1,9 @@
+django
+matplotlib
+pillow
+openai
+python-dotenv
+numpy
+requests
+markdown
+xhtml2pdf
