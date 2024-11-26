@@ -4,41 +4,64 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <title>Añadir experiencia</title>
+    <title>Añadir estudios y experiencia</title>
 </head>
 
 <body>
 
     <h1 style="text-align: center;">¡Es momento de conocerte!</h1>
     <br>
-    <h3 style="text-align: center;">Añade tus estudios aquí abajo:</h3>
 
-    <div style="display: flex; justify-content: center;">
-        <button type="button" class="btn btn-classic" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar tus estudios</button>
-    </div>
-    
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Tus estudios</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="modalForm">
-
-                    {% csrf_token %}
-
-                    <h2>Añade una educación formal</h2>
-                    {{ education.as_p }}
-
-                </form>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" form="modalForm" class="btn btn-classic" name="formEducation">Guardar</button>
+    <!-- Contenedor para la card con ambos títulos y botones -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Añade tus estudios y experiencia</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Añadir estudios -->
+                            <div class="col-md-6 mb-4">
+                                <h5>Añade tus estudios</h5>
+                                <button type="button" class="btn btn-classic" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar tus estudios</button>
+                            </div>
+                            <!-- Añadir experiencia laboral -->
+                            <div class="col-md-6 mb-4">
+                                <h5>Añade tu experiencia laboral</h5>
+                                <button type="button" class="btn btn-classic" data-bs-toggle="modal" data-bs-target="#modalExperience">Agregar tu experiencia</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <a class="btn btn-secondary me-2" href="{% url 'updateAccount' %}" role="button">Regresa</a>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Modal para estudios -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tus estudios</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2>Añade una educación formal</h2>
+                    <form method="post" id="modalForm">
+                        {% csrf_token %}
+                        {{ education.as_p }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="modalForm" class="btn btn-classic" name="formEducation">Guardar</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -49,35 +72,27 @@
             modal.hide();  // Cerrar modal
         });
     </script>
-    <br>
-    <h3 style="text-align: center;">Añade tu experiencia laboral aquí abajo:</h3>
 
-    <div style="display: flex; justify-content: center;">
-        <button type="button" class="btn btn-classic" data-bs-toggle="modal" data-bs-target="#modalExperience">Agregar tu experiencia</button>
-    </div>
-    
+    <!-- Modal para experiencia laboral -->
     <div class="modal fade" id="modalExperience" tabindex="-1" aria-labelledby="experienceLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="experienceLabel">Tu Experiencia Laboral</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="experienceModalForm">
-
-                    {% csrf_token %}
-
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="experienceLabel">Tu Experiencia Laboral</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <h2>Añade una experiencia laboral</h2>
-                    {{ experience.as_p }}
-
-                </form>
+                    <form method="post" id="experienceModalForm">
+                        {% csrf_token %}
+                        {{ experience.as_p }}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="experienceModalForm" class="btn btn-classic" name="formExperience">Guardar</button>
+                </div>
             </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" form="experienceModalForm" class="btn btn-classic" name="formExperience">Guardar</button>
-            </div>
-        </div>
         </div>
     </div>
 
@@ -88,17 +103,6 @@
             modal.hide();  // Cerrar modal
         });
     </script>
-
-    <br>
-    
-
-    <form method="post">
-        {% csrf_token %}
-        <div style="display: flex; justify-content: center;">
-            <button type="submit" class="btn btn-secondary" name="continueBtn">Volver</button>
-        </div>
-    </form>
-    
 
 </body>
 {% endblock content %}

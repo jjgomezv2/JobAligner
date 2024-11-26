@@ -7,9 +7,9 @@ class JobVacancyForm(forms.ModelForm):
         fields = '__all__'
         labels = {
             'title': 'Título de la vacante',
-            'decription': 'Descripción de la vacante',
+            'description': 'Descripción de la vacante',
             'requirements': 'Requisitos de la vacante',
-            'location': 'Localización del lugar',
+            'location': 'Localización de la compañía',
             'company_name': 'Nombre de la compañía',
         }
 

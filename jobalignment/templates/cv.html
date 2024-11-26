@@ -7,48 +7,96 @@
     <meta charset="UTF-8">
     <title>Tu Hoja de Vida</title>
 </head>
+
 <body>
+
     <br>
     <br>
     <h1 class="text-center">Hoja de Vida para {{ cv.vacancy.title }}</h1>
+    <br>
+    
+    <!-- Card principal que contiene todo -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4>Tu CV adaptado a la vacante y recomendaciones</h4>
+                    </div>
+                    <div class="card-body">
 
-    <br>
-    <br>
-    <br>
-    {% if cv.cvpdf %}
-        <div class="d-flex justify-content-center">
-            <!-- Botón para abrir el PDF -->
-            <a href="{{ cv.cvpdf.url }}" target="_blank" class="btn btn-classic me-2">Abrir PDF</a>
-            <!-- Botón para descargar el PDF -->
-            <a href="{{ cv.cvpdf.url }}" download class="btn btn-secondary">Descargar PDF</a>
+                        <!-- Botones para abrir y descargar el PDF -->
+                        {% if cv.cvpdf %}
+                            <div class="d-flex justify-content-start mb-3">
+                                <a href="{{ cv.cvpdf.url }}" target="_blank" class="btn btn-classic me-2">Abrir PDF</a>
+                                <a href="{{ cv.cvpdf.url }}" download class="btn btn-secondary">Descargar PDF</a>
+                            </div>
+                        {% else %}
+                            <p>No se encontró el archivo PDF.</p>
+                        {% endif %}
+                        
+                        <!-- Probabilidad de éxito -->
+                        <h2>Probabilidad de éxito: {{ suggestion.probability }}%</h2>
+                        
+                        <br>
+
+                        <!-- Acordeón para los datos de la vacante -->
+                        <div class="accordion" id="vacancyDetailsAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="vacancyDescriptionHeader">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#vacancyDescription" aria-expanded="false" aria-controls="vacancyDescription">
+                                        Detalles de la vacante
+                                    </button>
+                                </h2>
+                                <div id="vacancyDescription" class="accordion-collapse collapse" aria-labelledby="vacancyDescriptionHeader" data-bs-parent="#vacancyDetailsAccordion">
+                                    <div class="accordion-body">
+                                        <h3>Descripción de la vacante:</h3>
+                                        <p>{{ cv.vacancy.description }}</p>
+                                        <br>
+                                        <h3>Ubicación:</h3>
+                                        <p>{{ cv.vacancy.location }}</p>
+                                        <br>
+                                        <h3>Compañía:</h3>
+                                        <p>{{ cv.vacancy.company_name }}</p>
+                                        <br>
+                                        <h3>Requisitos:</h3>
+                                        <p>{{ cv.vacancy.requirements }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br>
+
+                        <!-- Acordeón para las recomendaciones -->
+                        <div class="accordion" id="suggestionsAccordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="suggestionsHeader">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#suggestions" aria-expanded="false" aria-controls="suggestions">
+                                        Recomendaciones para el éxito
+                                    </button>
+                                </h2>
+                                <div id="suggestions" class="accordion-collapse collapse" aria-labelledby="suggestionsHeader" data-bs-parent="#suggestionsAccordion">
+                                    <div class="accordion-body">
+                                        <p>{{ suggestion.suggestions | safe }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <!-- Botón para regresar -->
+                        <div class="d-flex justify-content-center mt-2 mb-2">
+                            <a class="btn btn-secondary me-2" href="{% url 'home' %}" role="button">Regresa</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
-    {% else %}
-        <p>No se encontró el archivo PDF.</p>
-    {% endif %}
-
-    <br>
-    <br>
-    <h2>Probabilidad de éxito: {{ suggestion.probability }}% </h2>
-    <br>
-    <h3>Descripción de la vacante:</h3>
-    <p>{{ cv.vacancy.description }}</p>
-    <br>
-    <h3>Ubicación:</h3>
-    <p>{{ cv.vacancy.location }}</p>
-    <br>
-    <h3>Compañía:</h3>
-    <p>{{ cv.vacancy.company_name }}</p>
-    <br>
-    <h3>Requisitos:</h3>
-    <p>{{ cv.vacancy.requirements }}</p>
-    <br>
-    <br>
-    <h2>Recomendaciones para obtener el puesto:</h2>
-    <p>{{ suggestion.suggestions | safe }}</p>
-    <br>
-    <div class="d-flex justify-content-center mt-2 mb-2">
-        <a class="btn btn-secondary me-2" href="{% url 'home' %}" role="button">Regresa</a>
     </div>
-    <br>
+
 </body>
+
 {% endblock content %}

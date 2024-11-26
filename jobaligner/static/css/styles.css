@@ -26,3 +26,34 @@ p {
 .footer{
     background-color: #e7f4fd !important;
 }
+
+.row .col {
+    display: flex; /* Asegura que las columnas mantengan proporciones */
+    justify-content: center; /* Centra las tarjetas en la columna */
+}
+
+.product_card {
+    width: 18rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center; /* Opcional: centra el contenido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opcional: mejora visual */
+    border: 1px solid #ddd; /* Opcional: define un borde */
+    border-radius: 15px; /* Opcional: esquinas redondeadas */
+}
+
+.form-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center; /* Opcional: centra el contenido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opcional: mejora visual */
+    border: 1px solid #ddd; /* Opcional: define un borde */
+    border-radius: 15px; /* Opcional: esquinas redondeadas */
+}
+
+.custom-header{
+    background-color: #090467 !important;
+}

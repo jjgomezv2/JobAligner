@@ -9,15 +9,23 @@
 </head>
 <body>
 
-    <form method="post" id="form">
-        {% csrf_token %}
-        <h2>¡Es momento de ingresar tu vacante!</h2>
-        {{ vacancyForm.as_p }}
-        <div class="d-flex justify-content-start mt-4">
-            <a class="btn btn-secondary me-2" href="{% url 'home' %}" role="button">Regresa</a>
-            <button type="submit" class="btn btn-classic">Enviar</button>
+<div class="container mt-5 mb-3">
+    <div class="card form-card shadow-lg">
+        <div class="card-header custom-header text-white text-center">
+            <h3 class="card-title mb-0">¡Es momento de ingresar tu vacante!</h3>
         </div>
-    </form>
+        <div class="card-body">
+            <form method="post" id="form">
+                {% csrf_token %}
+                {{ vacancyForm.as_p }}
+                <div class="d-flex justify-content-center mt-4">
+                    <a class="btn btn-secondary me-2" href="{% url 'home' %}" role="button">Regresa</a>
+                    <button type="submit" class="btn btn-classic">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+</body>
 {% endblock content %}
-
