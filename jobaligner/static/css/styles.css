@@ -57,3 +57,12 @@ p {
 .custom-header{
     background-color: #090467 !important;
 }
+
+.spinner-border {
+    width: 4rem;
+    height: 4rem;
+}
+  
+.progress-bar {
+    background-color: #090467;
+}
